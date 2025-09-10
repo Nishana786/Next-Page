@@ -1,88 +1,47 @@
-"use client";
+'use client'; // ✅ build സമയത്ത് pre-render ഒഴിവാക്കാൻ
 
-import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
-import { useDispatch } from "react-redux";
-import { addToCart } from "@/redux/cartSlice";
-import { AppDispatch } from "@/redux/store";
-import Image from "next/image";
+import { useParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
-// ✅ Product type
 interface Product {
   id: number;
   title: string;
   description: string;
   price: number;
-  images: string[];
+  thumbnail: string;
 }
 
-export default function ProductDetail() {
-  const { id } = useParams(); 
-  const router = useRouter();
-  const dispatch = useDispatch<AppDispatch>();
+export default function ProductDetailPage() {
+  
+  const params = useParams();
+  const id = params?.id;
   const [product, setProduct] = useState<Product | null>(null);
 
   useEffect(() => {
-    if (!id) return;
-
-    const fetchProduct = async () => {
-      try {
-        const res = await fetch(`https://dummyjson.com/products/${id}`);
-        if (!res.ok) throw new Error("Failed to fetch product");
-        const data: Product = await res.json();
-        setProduct(data);
-      } catch (error) {
-        console.error("Error fetching product:", error);
-      }
-    };
-
-    fetchProduct();
+    if (id) {
+      fetch(`https://dummyjson.com/products/${id}`)
+        .then((res) => res.json())
+        .then((data) => setProduct(data))
+        .catch((err) => console.error('Error fetching product:', err));
+    }
   }, [id]);
 
-  const handleAddToCart = () => {
-    if (!product) return;
-    dispatch(
-      addToCart({
-        id: product.id,
-        title: product.title,
-        price: product.price,
-        image: product.images[0],
-        quantity: 1,
-      })
-    );
-    router.push("/cart");
-  };
-
-  if (!product) return <p className="p-6 text-gray-500">Loading product...</p>;
+  if (!id) return <div className="p-6">Product ID ലഭ്യമായില്ല.</div>;
+  if (!product) return <div className="p-6">Product load ആകുന്നു...</div>;
 
   return (
-    <div className="max-w-4xl mx-auto px-6 py-6">
-      <div className="flex flex-col md:flex-row gap-6">
-        {/* ✅ Next.js optimized image */}
-        <div className="relative w-full md:w-1/2 h-96">
-          <Image
-            src={product.images[0]}
-            alt={product.title}
-            fill
-            className="object-contain rounded-lg bg-white"
-            priority
-          />
-        </div>
-
-        <div className="flex-1">
-          <h1 className="text-3xl font-bold mb-4">{product.title}</h1>
-          <p className="text-lg text-gray-700 mb-4">{product.description}</p>
-          <p className="text-2xl font-semibold text-orange-500 mb-6">
-            ${product.price}
-          </p>
-          <button
-            onClick={handleAddToCart}
-            className="bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition"
-          >
-            Add to Cart
-          </button>
-        </div>
-      </div>
+    <div className="p-6 max-w-3xl mx-auto">
+      <Image
+        src={product.thumbnail}
+        alt={product.title}
+        width={400}
+        height={400}
+        className="rounded-lg mx-auto"
+      />
+      <h1 className="text-2xl font-bold mt-4">{product.title}</h1>
+      <p className="text-gray-600 mt-2">{product.description}</p>
+      <p className="text-green-700 font-bold text-xl mt-3">₹{product.price}</p>
     </div>
   );
 }
