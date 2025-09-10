@@ -20,10 +20,10 @@ function Footer() {
         <div>
           <h3 className="text-lg font-semibold mb-3">Quick Links</h3>
           <ul className="space-y-2 text-gray-300 text-sm">
-            <li><a href="/" className="hover:text-orange-400">Home</a></li>
-            <li><a href="/products" className="hover:text-orange-400">Products</a></li>
-            <li><a href="/about" className="hover:text-orange-400">About Us</a></li>
-            <li><a href="/contact" className="hover:text-orange-400">Contact</a></li>
+            <li><Link href="/" className="hover:text-orange-400">Home</Link></li>
+            <li><Link href="/products" className="hover:text-orange-400">Products</Link></li>
+            <li><Link href="/about" className="hover:text-orange-400">About Us</Link></li>
+            <li><Link href="/contact" className="hover:text-orange-400">Contact</Link></li>
           </ul>
         </div>
 
@@ -31,10 +31,10 @@ function Footer() {
         <div>
           <h3 className="text-lg font-semibold mb-3">Customer Service</h3>
           <ul className="space-y-2 text-gray-300 text-sm">
-            <li><a href="#" className="hover:text-orange-400">FAQ</a></li>
-            <li><a href="#" className="hover:text-orange-400">Shipping Policy</a></li>
-            <li><a href="#" className="hover:text-orange-400">Return Policy</a></li>
-            <li><a href="#" className="hover:text-orange-400">Terms & Conditions</a></li>
+            <li><Link href="#" className="hover:text-orange-400">FAQ</Link></li>
+            <li><Link href="#" className="hover:text-orange-400">Shipping Policy</Link></li>
+            <li><Link href="#" className="hover:text-orange-400">Return Policy</Link></li>
+            <li><Link href="#" className="hover:text-orange-400">Terms & Conditions</Link></li>
           </ul>
         </div>
 
