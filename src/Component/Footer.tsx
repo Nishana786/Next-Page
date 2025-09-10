@@ -1,5 +1,6 @@
 import React from "react";
 import { Facebook, Instagram, Twitter, Mail, Phone } from "lucide-react";
+import Link from "next/link";
 
 function Footer() {
   return (
@@ -48,9 +49,9 @@ function Footer() {
               <Mail size={18} className="text-orange-400" /> support@eshop.com
             </li>
             <li className="flex gap-4 mt-3">
-              <a href="#" className="hover:text-orange-400"><Facebook /></a>
-              <a href="#" className="hover:text-orange-400"><Instagram /></a>
-              <a href="#" className="hover:text-orange-400"><Twitter /></a>
+              <Link href="#" className="hover:text-orange-400"><Facebook /></Link>
+              <Link href="#" className="hover:text-orange-400"><Instagram /></Link>
+              <Link href="#" className="hover:text-orange-400"><Twitter /></Link>
             </li>
           </ul>
         </div>

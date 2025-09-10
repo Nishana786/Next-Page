@@ -1,15 +1,26 @@
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+"use client";
+
+import { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/redux/cartSlice";
 import { AppDispatch } from "@/redux/store";
+import Image from "next/image";
 
-const ProductDetail: React.FC = () => {
+// ✅ Product type
+interface Product {
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  images: string[];
+}
+
+export default function ProductDetail() {
+  const { id } = useParams(); 
   const router = useRouter();
-  const { id } = router.query;
   const dispatch = useDispatch<AppDispatch>();
-
-  const [product, setProduct] = useState<any>(null);
+  const [product, setProduct] = useState<Product | null>(null);
 
   useEffect(() => {
     if (!id) return;
@@ -17,7 +28,8 @@ const ProductDetail: React.FC = () => {
     const fetchProduct = async () => {
       try {
         const res = await fetch(`https://dummyjson.com/products/${id}`);
-        const data = await res.json();
+        if (!res.ok) throw new Error("Failed to fetch product");
+        const data: Product = await res.json();
         setProduct(data);
       } catch (error) {
         console.error("Error fetching product:", error);
@@ -38,19 +50,25 @@ const ProductDetail: React.FC = () => {
         quantity: 1,
       })
     );
-    router.push("/cart"); 
+    router.push("/cart");
   };
 
-  if (!product) return <p>Loading product details...</p>;
+  if (!product) return <p className="p-6 text-gray-500">Loading product...</p>;
 
   return (
     <div className="max-w-4xl mx-auto px-6 py-6">
       <div className="flex flex-col md:flex-row gap-6">
-        <img
-          src={product.images[0]}
-          alt={product.title}
-          className="w-full md:w-1/2 h-96 object-contain rounded-lg"
-        />
+        {/* ✅ Next.js optimized image */}
+        <div className="relative w-full md:w-1/2 h-96">
+          <Image
+            src={product.images[0]}
+            alt={product.title}
+            fill
+            className="object-contain rounded-lg bg-white"
+            priority
+          />
+        </div>
+
         <div className="flex-1">
           <h1 className="text-3xl font-bold mb-4">{product.title}</h1>
           <p className="text-lg text-gray-700 mb-4">{product.description}</p>
@@ -67,6 +85,4 @@ const ProductDetail: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default ProductDetail;
+}

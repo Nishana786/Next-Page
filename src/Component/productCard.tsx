@@ -1,8 +1,9 @@
-"use client";
+
 
 import React from "react";
 import Link from "next/link";
-import { Star, ShoppingCart } from "lucide-react"; // ShoppingCart icon added
+import { Star, ShoppingCart } from "lucide-react";
+import Image from "next/image";
 
 type ProductProps = {
   product: {
@@ -23,7 +24,7 @@ const ProductCard: React.FC<ProductProps> = ({ product }) => {
   return (
     <div className="bg-white shadow-md rounded-xl p-4 hover:shadow-lg transition flex flex-col">
       {/* Image */}
-      <img
+      <Image
         src={product.images?.[0]}
         alt={product.title}
         className="w-full h-48 object-contain mb-4"

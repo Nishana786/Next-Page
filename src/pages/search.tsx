@@ -1,7 +1,8 @@
-// 'use client';
+'use client';
 
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 export default function SearchPage() {
   const searchParams = useSearchParams();
@@ -30,7 +31,7 @@ export default function SearchPage() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {results.map((p) => (
             <div key={p.id} className="border rounded p-2">
-              <img src={p.thumbnail} alt={p.title} className="h-32 object-cover mx-auto" />
+              <Image src={p.thumbnail} alt={p.title} className="h-32 object-cover mx-auto" />
               <h3 className="text-sm font-semibold mt-2">{p.title}</h3>
               <p className="text-green-700 font-bold">₹{p.price}</p>
             </div>

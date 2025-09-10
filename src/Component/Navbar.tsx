@@ -5,6 +5,8 @@ import { ShoppingCart, Search } from 'lucide-react';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 
+
+
 const Navbar = () => {
   const [search, setSearch] = useState('');
   const cartCount = useSelector((state: RootState) => state.cart.items.length);

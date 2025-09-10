@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import HeroSection from"../Component/HeroSection";
-// import Navbar from "@/Component/Navbar";
+
 
 export default function Home() {
   return (
@@ -11,9 +11,9 @@ export default function Home() {
     
        
     <div>
-       {/* <Navbar /> */}
+
        <HeroSection/>
-      {/* Hero Section */}
+ 
       <section className="relative bg-gradient-to-r from-orange-50 via-white to-orange-50 py-20">
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 items-center gap-10">
           {/* Left Content */}

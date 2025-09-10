@@ -1,4 +1,3 @@
-"use client";
 
 import Image from "next/image";
 import { FC } from "react";
@@ -15,7 +14,7 @@ const Hero: FC = () => {
         
         {/* Left Side - Text + Cards */}
         <div className="space-y-6">
-          <h1 className="text-5xl md:text-6xl font-extrabold text-gray-800 leading-tight">
+          <h1 className="text-5xl md:text-6xl font-extrabold text-gray-800 leading-tight animate-bounce">
             Accessories <br />
             <span className="text-amber-700">The Best For You</span>
           </h1>
@@ -24,7 +23,7 @@ const Hero: FC = () => {
           </p>
           <div className="flex gap-6 mt-8">
             {/* Card 1 */}
-            <div className="bg-white rounded-2xl shadow-lg p-4 w-40">
+            <div className="bg-white rounded-2xl shadow-lg p-4 w-40 ">
               <Image
                 src="/image/image 3.jpg"
                 alt="Latte"
@@ -50,7 +49,7 @@ const Hero: FC = () => {
         </div>
 
         {/* Right Side - Cards */}
-        <div className="flex flex-col gap-6 items-end">
+        <div className="flex flex-col gap-6 items-end ">
           {/* Card 3 */}
           <div className="bg-white rounded-2xl shadow-lg p-4 w-52">
             <Image
